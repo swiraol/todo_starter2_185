@@ -1,0 +1,13 @@
+class Session_Persistence:
+    def __init__(self, session):
+        self.session = session
+        if 'lists' not in self.session:
+            self.session['lists'] = []
+    
+    def all_lists(self):
+        return self.session['lists']
+    
+    def find_list(self, list_id):
+        found = (lst for lst in self.session['lists'] if list_id == lst['id'])
+
+        return next(found, None)

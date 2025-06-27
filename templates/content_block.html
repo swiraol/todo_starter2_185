@@ -1,0 +1,15 @@
+<header>
+  <h2>{{ todo_lst['title'] }}</h2>
+  <ul>
+    <li>
+      <form class="complete_all"
+            action="/lists/{{ todo_lst['id']}}/complete_all"
+            method="post">
+            <button class="check" type="submit">Complete All</button>
+      </form>
+    </li>
+    <li>
+      <a class="edit" href="/lists/{{ todo_lst['id'] }}/edit">Edit List</a>
+    </li>
+  </ul>
+</header>
