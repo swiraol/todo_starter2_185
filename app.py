@@ -80,22 +80,14 @@ def get_lists():
 @app.route('/lists', methods=["POST"])
 def create_list():
     title = request.form.get('list_title', "").strip()
-    lists = session['lists']
-
-    error = error_for_list_title(title, lists)
+    error = error_for_list_title(title, all_lists())
 
     if error:
         flash(error, "error")
         return render_template('new_list.html', title=title)
     
-    session['lists'].append({
-            'id': str(uuid4()),
-            'title': title, 
-            'todos': [],
-    })
-        
+    create_new_list(title)    
     flash('The list has been added.', 'success')
-    session.modified = True
     return redirect(url_for('get_lists'))
 
 @app.route('/lists/<list_id>', methods=["GET"])

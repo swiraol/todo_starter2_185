@@ -11,3 +11,13 @@ class Session_Persistence:
         found = (lst for lst in self.session['lists'] if list_id == lst['id'])
 
         return next(found, None)
+    
+    def create_new_list(self, title):
+        self.session['lists'].append({
+            'id': str(uuid4()),
+            'title': title,
+            'todos': []
+        })
+
+        self.session.modified = True
+        
