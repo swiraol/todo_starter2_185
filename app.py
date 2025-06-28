@@ -80,13 +80,13 @@ def get_lists():
 @app.route('/lists', methods=["POST"])
 def create_list():
     title = request.form.get('list_title', "").strip()
-    error = error_for_list_title(title, all_lists())
+    error = error_for_list_title(title, g.storage.all_lists())
 
     if error:
         flash(error, "error")
         return render_template('new_list.html', title=title)
     
-    create_new_list(title)    
+    g.storage.create_new_list(title)    
     flash('The list has been added.', 'success')
     return redirect(url_for('get_lists'))
 

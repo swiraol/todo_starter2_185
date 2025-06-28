@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 class Session_Persistence:
     def __init__(self, session):
         self.session = session
@@ -13,7 +15,7 @@ class Session_Persistence:
         return next(found, None)
     
     def create_new_list(self, title):
-        self.session['lists'].append({
+        self.all_lists().append({
             'id': str(uuid4()),
             'title': title,
             'todos': []
