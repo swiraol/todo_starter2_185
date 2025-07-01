@@ -3,29 +3,32 @@
 {% block content %}
   <section id="todos">
     <header>
-      <h2>Editing '{{ todo_lst['title'] }}'</h2>
+      <h2>Editing '{{ lst.title }}'</h2>
       <ul>
         <li>
-          <form class="delete" action="{{ url_for('delete_list', list_id=todo_lst.id) }}" 
+          <form class="delete" action="{{ url_for('delete_list', list_id=lst.id) }}"
                 method="post">
-            <button class="delete" type="submit">Delete List</button>
+            <button type="submit" class="delete">Delete List</button>
           </form>
         </li>
       </ul>
     </header>
   </section>
-  <form action="/lists/{{ todo_lst.id }}" method="post">
+
+  <form action="{{ url_for('update_list', list_id=lst.id) }}" method="post">
     <dl>
       <dt>
-        <label for="list_title">Enter the new title for the list:</label>
+        <label for="list_title">Enter the new list title:</label>
       </dt>
       <dd>
-        <input type="text" name="title" placeholder="Title" value="{{ title if title is defined else todo_lst['title'] }}">
+        <input type="text" name="list_title" placeholder="List Title"
+               value="{{ title if title is defined else lst.title }}">
+
       </dd>
     </dl>
-    <fieldset>
+    <fieldset class="actions">
       <input type="submit" value="Save">
-      <a href="{{ url_for('show_list', list_id=todo_lst.id) }}">Cancel</a>
+      <a href="{{ url_for('show_list', list_id=lst.id) }}">Cancel</a>
     </fieldset>
   </form>
 {% endblock %}
