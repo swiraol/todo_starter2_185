@@ -40,7 +40,7 @@ class DatabasePersistence:
                             title text NOT NULL,
                             completed boolean NOT NULL DEFAULT false,
                             list_id INTEGER NOT NULL
-                                            REFERENCES list (id) 
+                                            REFERENCES lists (id) 
                                             ON DELETE CASCADE
                         );
                     """)
